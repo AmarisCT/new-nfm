@@ -1,0 +1,1536 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #111;
+    color: #fff;
+}
+
+body {
+    overflow: hidden;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.scene {
+    position: fixed;
+    inset: 0;
+    display: none;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.scene.active {
+    display: block;
+}
+
+.hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+
+/* =========================================================
+   FADE TRANSITION
+========================================================= */
+
+#fadeOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+}
+
+#fadeOverlay.black {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   PAGE DOTS
+========================================================= */
+
+#sceneDots {
+    position: fixed;
+    z-index: 9000;
+    top: calc(18px + env(safe-area-inset-top));
+    left: 50%;
+    display: flex;
+    gap: 8px;
+    transform: translateX(-50%);
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.24);
+}
+
+.dot.active {
+    background: #ffd28a;
+    box-shadow: 0 0 12px rgba(255,190,90,0.85);
+}
+
+
+/* =========================================================
+   SUNRISE BACKGROUNDS
+========================================================= */
+
+.sceneOne {
+    background:
+        linear-gradient(
+            #15141d 0%,
+            #2a1e32 30%,
+            #6a3044 56%,
+            #b64d45 76%,
+            #e67d50 100%
+        );
+}
+
+.sceneTwo {
+    background:
+        radial-gradient(
+            circle at 50% 115%,
+            #b1573f,
+            #57313f 48%,
+            #17151d 100%
+        );
+}
+
+.sceneThree {
+    background:
+        linear-gradient(
+            #2b2338 0%,
+            #70414c 40%,
+            #d5604d 70%,
+            #f7a760 100%
+        );
+}
+
+.sceneFour {
+    background:
+        radial-gradient(
+            circle at 50% 110%,
+            #e4864b,
+            #784044 52%,
+            #17151d 100%
+        );
+}
+
+.sceneFive {
+    background:
+        linear-gradient(
+            155deg,
+            #21191d 0%,
+            #6c3b32 58%,
+            #d47d48 100%
+        );
+}
+
+.sceneSix {
+    background:
+        radial-gradient(
+            circle at 20% 110%,
+            #df7b43,
+            #6e3a2d 55%,
+            #171719 100%
+        );
+}
+
+.sceneSeven {
+    background:
+        linear-gradient(
+            #66526e 0%,
+            #a95d69 35%,
+            #ee7b53 67%,
+            #ffc57c 100%
+        );
+}
+
+.sceneEight {
+    background:
+        radial-gradient(
+            circle at 50% 115%,
+            #ffe2a8,
+            #f39b5d 25%,
+            #a95253 62%,
+            #1b1720 100%
+        );
+}
+
+
+/* =========================================================
+   SUN + GLOW
+========================================================= */
+
+.sunGlow {
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    bottom: -8%;
+    width: min(920px, 135vw);
+    height: 530px;
+    transform: translateX(-50%);
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,218,145,0.62),
+            rgba(255,132,72,0.22) 42%,
+            transparent 72%
+        );
+    filter: blur(28px);
+}
+
+.sun {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    bottom: 11%;
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    background:
+        radial-gradient(
+            circle,
+            #fffef3 0%,
+            #ffe1a1 55%,
+            #f28a55 100%
+        );
+    box-shadow:
+        0 0 90px rgba(255,180,90,0.76);
+}
+
+.sceneOne .sun {
+    bottom: 4%;
+    width: 105px;
+    height: 105px;
+    opacity: 0.7;
+}
+
+.sceneThree .sun {
+    bottom: 18%;
+}
+
+.sceneSeven .sun {
+    bottom: 31%;
+    width: 180px;
+    height: 180px;
+}
+
+
+/* =========================================================
+   MOUNTAINS
+========================================================= */
+
+.mountains {
+    position: absolute;
+    z-index: 2;
+    left: -5%;
+    width: 110%;
+}
+
+.backMountains {
+    bottom: 22%;
+    height: 245px;
+    background: rgba(82,58,72,0.72);
+    clip-path:
+        polygon(
+            0 100%,
+            0 68%,
+            8% 45%,
+            18% 73%,
+            29% 28%,
+            39% 68%,
+            50% 37%,
+            62% 73%,
+            75% 24%,
+            87% 66%,
+            100% 38%,
+            100% 100%
+        );
+}
+
+.frontMountains {
+    bottom: 16%;
+    height: 208px;
+    background: rgba(29,36,31,0.96);
+    clip-path:
+        polygon(
+            0 100%,
+            0 67%,
+            13% 27%,
+            26% 72%,
+            39% 38%,
+            53% 77%,
+            66% 29%,
+            80% 73%,
+            92% 31%,
+            100% 64%,
+            100% 100%
+        );
+}
+
+
+/* =========================================================
+   FOREST
+========================================================= */
+
+.forest {
+    position: absolute;
+    left: -10%;
+    width: 120%;
+    pointer-events: none;
+}
+
+.forestBack {
+    z-index: 3;
+    bottom: 12%;
+    height: 270px;
+    opacity: 0.7;
+    background-image:
+        linear-gradient(
+            35deg,
+            transparent 38%,
+            #293428 39%,
+            #293428 62%,
+            transparent 63%
+        ),
+        linear-gradient(
+            -35deg,
+            transparent 38%,
+            #293428 39%,
+            #293428 62%,
+            transparent 63%
+        );
+    background-size:
+        130px 230px,
+        130px 230px;
+    background-position:
+        0 25px,
+        65px 25px;
+}
+
+.forestFront {
+    z-index: 4;
+    bottom: 5%;
+    height: 320px;
+    opacity: 0.98;
+    background-image:
+        linear-gradient(
+            34deg,
+            transparent 37%,
+            #0b1d13 38%,
+            #0b1d13 63%,
+            transparent 64%
+        ),
+        linear-gradient(
+            -34deg,
+            transparent 37%,
+            #0b1d13 38%,
+            #0b1d13 63%,
+            transparent 64%
+        );
+    background-size:
+        155px 275px,
+        155px 275px;
+    background-position:
+        0 25px,
+        78px 25px;
+}
+
+.forest::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 42%;
+    background:
+        linear-gradient(
+            to top,
+            rgba(5,13,9,0.98),
+            transparent
+        );
+}
+
+.movingForest {
+    animation: forestMove 8s linear infinite;
+}
+
+.fastForest {
+    animation-duration: 5s;
+}
+
+@keyframes forestMove {
+    to {
+        background-position:
+            -470px 25px,
+            -392px 25px;
+    }
+}
+
+
+/* =========================================================
+   ROAD
+========================================================= */
+
+.road {
+    position: absolute;
+    z-index: 5;
+    left: -15%;
+    bottom: -9%;
+    width: 130%;
+    height: 54%;
+    background:
+        linear-gradient(
+            #514d45,
+            #30322c
+        );
+    clip-path:
+        polygon(
+            44% 0,
+            56% 0,
+            86% 100%,
+            14% 100%
+        );
+}
+
+.roadLine {
+    position: absolute;
+    left: calc(50% - 4px);
+    top: -10%;
+    width: 8px;
+    height: 140%;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #f3e4b2 0 42px,
+            transparent 42px 92px
+        );
+}
+
+.movingRoad .roadLine {
+    animation: roadMove 0.65s linear infinite;
+}
+
+@keyframes roadMove {
+    to {
+        background-position-y: 92px;
+    }
+}
+
+
+/* =========================================================
+   SOLDIER
+========================================================= */
+
+.soldierWrap {
+    position: absolute;
+    z-index: 30;
+    left: 50%;
+    bottom: 8%;
+    width: 112px;
+    height: 248px;
+    transform: translateX(-50%);
+    transform-origin: bottom center;
+}
+
+.soldier {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.ruck {
+    position: absolute;
+    z-index: 1;
+    left: 1px;
+    top: 64px;
+    width: 60px;
+    height: 96px;
+    border-radius: 8px;
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #4b5943 0 10px,
+            #697458 10px 20px
+        );
+}
+
+.ruckPocket {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    width: 42px;
+    height: 30px;
+    border-radius: 5px;
+    background: #3e4937;
+}
+
+.head {
+    position: absolute;
+    z-index: 5;
+    left: 40px;
+    top: 15px;
+    width: 38px;
+    height: 44px;
+    border-radius: 48%;
+    background: #b77f64;
+}
+
+.patrolCap {
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    width: 48px;
+    height: 17px;
+    border-radius: 50% 50% 2px 2px;
+    background: #566246;
+}
+
+.torso {
+    position: absolute;
+    z-index: 4;
+    left: 31px;
+    top: 56px;
+    width: 59px;
+    height: 88px;
+    border-radius: 7px;
+    background:
+        repeating-linear-gradient(
+            135deg,
+            #778064 0 10px,
+            #566148 10px 20px,
+            #8a8a69 20px 28px
+        );
+}
+
+.torso span {
+    position: absolute;
+    left: 6px;
+    top: 16px;
+    width: 47px;
+    padding: 2px 1px;
+    background: #babba2;
+    color: #22281f;
+    font-size: 5px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.arm {
+    position: absolute;
+    z-index: 3;
+    top: 63px;
+    width: 17px;
+    height: 82px;
+    border-radius: 8px;
+    background: #687456;
+    transform-origin: top center;
+}
+
+.armLeft {
+    left: 23px;
+}
+
+.armRight {
+    right: 9px;
+}
+
+.leg {
+    position: absolute;
+    z-index: 2;
+    top: 136px;
+    width: 23px;
+    height: 100px;
+    background:
+        repeating-linear-gradient(
+            135deg,
+            #687456 0 9px,
+            #4d5a42 9px 18px
+        );
+    transform-origin: top center;
+}
+
+.legLeft {
+    left: 35px;
+}
+
+.legRight {
+    left: 62px;
+}
+
+.boot {
+    position: absolute;
+    left: -5px;
+    bottom: -4px;
+    width: 34px;
+    height: 20px;
+    border-radius: 4px 10px 2px 2px;
+    background: #352f27;
+}
+
+.walking .legLeft,
+.walking .armRight {
+    animation: strideA 0.72s ease-in-out infinite;
+}
+
+.walking .legRight,
+.walking .armLeft {
+    animation: strideB 0.72s ease-in-out infinite;
+}
+
+.walking .soldier {
+    animation: bounce 0.36s ease-in-out infinite alternate;
+}
+
+@keyframes strideA {
+    0%,
+    100% {
+        transform: rotate(20deg);
+    }
+
+    50% {
+        transform: rotate(-20deg);
+    }
+}
+
+@keyframes strideB {
+    0%,
+    100% {
+        transform: rotate(-20deg);
+    }
+
+    50% {
+        transform: rotate(20deg);
+    }
+}
+
+@keyframes bounce {
+    to {
+        transform: translateY(-4px);
+    }
+}
+
+
+/* =========================================================
+   CONTENT LAYOUT
+========================================================= */
+
+.heroContent,
+.centerContent,
+.pageContent {
+    position: relative;
+    z-index: 100;
+}
+
+.heroContent,
+.centerContent {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:
+        calc(70px + env(safe-area-inset-top))
+        24px
+        calc(45px + env(safe-area-inset-bottom));
+    text-align: center;
+}
+
+.eyebrow {
+    margin: 0 0 13px;
+    color: #ffd18a;
+    font-size: 0.69rem;
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.heroTitle {
+    margin: 0 0 22px;
+    max-width: 900px;
+    font-size: clamp(3.1rem, 7vw, 6.7rem);
+    line-height: 0.87;
+    letter-spacing: -0.055em;
+}
+
+.heroTitle span {
+    display: block;
+    color: #ffd27f;
+}
+
+.heroDistance {
+    margin: 0 0 27px;
+    color: #ffe6ad;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.mainButton {
+    min-height: 48px;
+    padding: 15px 28px;
+    border: 0;
+    border-radius: 10px;
+    background:
+        linear-gradient(
+            135deg,
+            #ffac52,
+            #ffd98f
+        );
+    color: #211d18;
+    font-size: 0.73rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    box-shadow:
+        0 13px 34px rgba(98,34,7,0.3);
+    cursor: pointer;
+}
+
+.mainButton:active {
+    transform: translateY(1px);
+}
+
+.mainButton:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+.enterHint,
+.finishEnterHint {
+    margin-top: 15px;
+    color: rgba(255,255,255,0.45);
+    font-size: 0.57rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.formTitle {
+    margin: 4px 0 14px;
+    font-size: clamp(2.8rem, 6vw, 5.7rem);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+}
+
+.subText {
+    margin: 0;
+    color: rgba(255,255,255,0.67);
+    font-size: 0.92rem;
+}
+
+.timeInputs,
+.detailsInputs {
+    display: flex;
+    justify-content: center;
+    gap: 11px;
+}
+
+.timeInputs {
+    align-items: flex-end;
+    margin: 30px 0 18px;
+}
+
+.detailsInputs {
+    margin-bottom: 20px;
+}
+
+.timeInputs label,
+.detailsInputs label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: rgba(255,255,255,0.66);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+.timeInputs input,
+.detailsInputs input {
+    border:
+        1px solid rgba(255,176,86,0.3);
+    border-radius: 9px;
+    background: rgba(18,15,19,0.5);
+    color: #fff;
+    font-weight: 900;
+    text-align: center;
+    outline: none;
+}
+
+.timeInputs input:focus,
+.detailsInputs input:focus {
+    border-color: rgba(255,201,123,0.8);
+    box-shadow: 0 0 0 3px rgba(255,167,78,0.12);
+}
+
+.timeInputs input {
+    width: 94px;
+    padding: 14px 8px;
+    font-size: 1.75rem;
+}
+
+.detailsInputs input {
+    width: 145px;
+    padding: 14px 10px;
+    font-size: 1.2rem;
+}
+
+.timeColon {
+    margin-bottom: 13px;
+    color: #ffc269;
+    font-size: 1.8rem;
+}
+
+.inputWithUnit {
+    position: relative;
+}
+
+.inputWithUnit input {
+    padding-right: 40px;
+}
+
+.inputUnit {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffc36f;
+    font-size: 0.58rem;
+    font-weight: 900;
+}
+
+.errorMessage {
+    min-height: 21px;
+    margin: 0 0 12px;
+    color: #ffb39c;
+    font-size: 0.74rem;
+}
+
+
+/* =========================================================
+   MARCH HUD
+========================================================= */
+
+.marchHUD {
+    position: absolute;
+    z-index: 160;
+    top: calc(82px + env(safe-area-inset-top));
+    left: 5vw;
+    right: 5vw;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.hudBlock {
+    min-width: 110px;
+}
+
+.marchHUD small {
+    display: block;
+    margin-bottom: 5px;
+    color: rgba(255,255,255,0.63);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+.marchHUD strong {
+    font-size: 1.45rem;
+    color: #fff2ce;
+}
+
+
+/* =========================================================
+   MILESTONES
+========================================================= */
+
+.milestoneCard,
+.marchComplete {
+    position: absolute;
+    z-index: 260;
+    left: 50%;
+    top: 43%;
+    width: min(600px, 84vw);
+    transform: translate(-50%, -50%);
+    border:
+        1px solid rgba(255,170,79,0.27);
+    border-radius: 19px;
+    background: rgba(25,15,16,0.96);
+    text-align: center;
+    box-shadow:
+        0 20px 62px rgba(49,16,7,0.42);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.milestoneCard {
+    min-height: 155px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.milestoneCard strong {
+    font-size: clamp(2.7rem, 7vw, 5.4rem);
+}
+
+.marchComplete {
+    padding: 35px 27px;
+}
+
+.marchComplete h2 {
+    margin: 0 0 23px;
+    font-size: clamp(2.5rem, 6vw, 4.8rem);
+    line-height: 0.92;
+}
+
+
+/* =========================================================
+   RESULT PAGE
+========================================================= */
+
+.giantTime {
+    margin: 3px 0 0;
+    color: #ffd083;
+    font-size: clamp(4rem, 11vw, 8.6rem);
+    line-height: 0.92;
+}
+
+.resultLabel {
+    margin: 8px 0 27px;
+    color: rgba(255,255,255,0.61);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.17em;
+}
+
+.standardCard,
+.differenceBox {
+    width: min(475px, 88vw);
+    padding: 19px 23px;
+    margin-bottom: 15px;
+    border-radius: 14px;
+}
+
+.standardCard {
+    border:
+        1px solid rgba(255,188,101,0.18);
+    background: rgba(255,255,255,0.035);
+}
+
+.standardCard small,
+.differenceBox small {
+    display: block;
+    margin-bottom: 5px;
+    color: rgba(255,255,255,0.58);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+}
+
+.standardCard strong {
+    font-size: 2.15rem;
+}
+
+.differenceBox {
+    margin-bottom: 23px;
+    border-left: 4px solid #ffac51;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,112,48,0.15),
+            rgba(255,192,92,0.03)
+        );
+}
+
+.differenceBox strong {
+    color: #ffd07e;
+    font-size: clamp(2.7rem, 7vw, 4.5rem);
+}
+
+
+/* =========================================================
+   SO.. OVERALL
+========================================================= */
+
+.pageContent {
+    width: min(1200px, 100%);
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding:
+        calc(76px + env(safe-area-inset-top))
+        6vw
+        calc(36px + env(safe-area-inset-bottom));
+    text-align: center;
+}
+
+.pageTitle {
+    margin: 5px 0 25px;
+    font-size: clamp(2.7rem, 5.3vw, 5.4rem);
+    line-height: 0.9;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    text-align: left;
+}
+
+.statCard {
+    position: relative;
+    min-height: 172px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 21px;
+    border:
+        1px solid rgba(255,184,98,0.19);
+    border-radius: 15px;
+    background: rgba(255,255,255,0.04);
+}
+
+.highlightedCard {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(215,81,55,0.23),
+            rgba(246,145,61,0.11)
+        );
+}
+
+.statLabel {
+    position: absolute;
+    top: 17px;
+    left: 17px;
+    color: #ffd493;
+    font-size: 0.56rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+}
+
+.statCard strong {
+    font-size: clamp(1.9rem, 4vw, 3.6rem);
+}
+
+.statCard p {
+    margin: 6px 0 0;
+    color: rgba(255,255,255,0.59);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+}
+
+.smallNote {
+    margin: 17px auto;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   PERSPECTIVE
+========================================================= */
+
+.perspectiveSingle {
+    width: min(720px, 90vw);
+    margin: 0 auto 30px;
+    padding: 34px 31px;
+    border-left: 4px solid #ffae56;
+    border-radius: 0 15px 15px 0;
+    background:
+        linear-gradient(
+            110deg,
+            rgba(255,111,48,0.18),
+            rgba(255,193,94,0.04)
+        );
+}
+
+.perspectiveSingle p {
+    margin: 0;
+    color: #fff6e9;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.45rem, 3vw, 2.25rem);
+    line-height: 1.55;
+}
+
+.perspectiveSingle strong {
+    color: #ffd48f;
+}
+
+
+/* =========================================================
+   FINAL MILE
+========================================================= */
+
+.finalCounter {
+    position: absolute;
+    z-index: 170;
+    left: 6vw;
+    top: 36%;
+    transform: translateY(-50%);
+}
+
+.finalCounter strong {
+    display: block;
+    font-size: clamp(3.3rem, 8vw, 7rem);
+    line-height: 0.93;
+}
+
+.finalCounter p:not(.eyebrow) {
+    margin: 17px 0 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.15rem, 2.7vw, 1.75rem);
+}
+
+
+/* =========================================================
+   FINISH STRUCTURE
+========================================================= */
+
+.finishGate {
+    position: absolute;
+    z-index: 70;
+    left: 50%;
+    bottom: 23%;
+    width: 330px;
+    height: 240px;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.finishTop {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 100%;
+    padding: 8px 10px 10px;
+    border-top: 12px solid #fff;
+    color: #fff;
+    font-size: 0.98rem;
+    font-weight: 900;
+    letter-spacing: 0.21em;
+    text-align: center;
+    transform: translateX(-50%);
+    transform-origin: center;
+}
+
+.finishPost {
+    position: absolute;
+    top: 0;
+    width: 13px;
+    height: 230px;
+    background: #fff;
+    transform-origin: top center;
+}
+
+.leftPost {
+    left: 0;
+}
+
+.rightPost {
+    right: 0;
+}
+
+
+/* =========================================================
+   FINISH STRUCTURE BREAK
+========================================================= */
+
+.finishGate.gateBurst .finishTop {
+    animation: breakTop 0.95s ease forwards;
+}
+
+.finishGate.gateBurst .leftPost {
+    animation: breakLeft 1s ease forwards;
+}
+
+.finishGate.gateBurst .rightPost {
+    animation: breakRight 1s ease forwards;
+}
+
+@keyframes breakTop {
+    to {
+        opacity: 0;
+        transform:
+            translateX(-50%)
+            translateY(-95px)
+            rotate(18deg)
+            scale(0.48);
+    }
+}
+
+@keyframes breakLeft {
+    to {
+        opacity: 0;
+        transform:
+            translate(-125px,82px)
+            rotate(-48deg)
+            scale(0.45);
+    }
+}
+
+@keyframes breakRight {
+    to {
+        opacity: 0;
+        transform:
+            translate(125px,82px)
+            rotate(48deg)
+            scale(0.45);
+    }
+}
+
+
+/* =========================================================
+   FINAL SOLDIER
+========================================================= */
+
+.finalSoldier {
+    z-index: 80;
+    bottom: 9%;
+    transition:
+        bottom 3s cubic-bezier(0.22,0.73,0.29,1),
+        transform 3s cubic-bezier(0.22,0.73,0.29,1);
+}
+
+.finalSoldier.crossingFinish {
+    bottom: 43%;
+    transform:
+        translateX(-50%)
+        scale(0.58);
+}
+
+
+/* =========================================================
+   FINAL BUTTONS
+========================================================= */
+
+.finishButton,
+.finishNext {
+    position: absolute;
+    z-index: 800;
+    right: 6vw;
+    bottom: calc(92px + env(safe-area-inset-bottom));
+}
+
+.finishEnterHint {
+    position: absolute;
+    z-index: 800;
+    right: 6vw;
+    bottom: calc(54px + env(safe-area-inset-bottom));
+    margin: 0;
+    text-align: right;
+}
+
+
+/* =========================================================
+   CONFETTI
+========================================================= */
+
+#finishConfettiCanvas,
+#confettiCanvas {
+    position: absolute;
+    inset: 0;
+    z-index: 700;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CELEBRATION
+========================================================= */
+
+.celebrationGlow {
+    position: absolute;
+    left: 50%;
+    bottom: -24%;
+    width: 85vw;
+    height: 72vh;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,210,119,0.7),
+            rgba(255,116,63,0.19) 40%,
+            transparent 70%
+        );
+    filter: blur(27px);
+}
+
+.celebrationContent {
+    z-index: 720;
+}
+
+.flags {
+    font-size: 2.6rem;
+}
+
+.flagStar {
+    margin: 0 10px;
+    color: #ffd27d;
+}
+
+.completeTitle {
+    margin: 3px 0 8px;
+    font-size: clamp(4rem, 11vw, 8.8rem);
+    line-height: 0.82;
+}
+
+.celebrationTime {
+    color: #ffd082;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+}
+
+.goldText {
+    margin: 8px 0;
+    color: #ffd181;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+}
+
+.medal {
+    margin: 10px 0;
+    font-size: 3.8rem;
+}
+
+.personalMessage {
+    max-width: 750px;
+    margin: 18px auto;
+    font-style: normal !important;
+}
+
+.personalMessage p {
+    margin: 0 0 16px;
+    font-size: clamp(1rem, 2.3vw, 1.48rem);
+    font-style: normal !important;
+    line-height: 1.52;
+}
+
+.finalStats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 17px 0;
+}
+
+.finalStats > div {
+    min-width: 122px;
+    padding: 14px 15px;
+    border:
+        1px solid rgba(255,195,112,0.22);
+    border-radius: 11px;
+    background: rgba(255,255,255,0.04);
+}
+
+.finalStats strong,
+.finalStats span {
+    display: block;
+}
+
+.finalStats strong {
+    font-size: 1.5rem;
+}
+
+.finalStats span {
+    margin-top: 4px;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .finishGate {
+        width: 292px;
+        height: 220px;
+    }
+
+    .finishPost {
+        height: 210px;
+    }
+}
+
+
+/* =========================================================
+   PHONE
+========================================================= */
+
+@media (max-width: 520px) {
+
+    .heroTitle {
+        font-size: 3.12rem;
+    }
+
+    .formTitle {
+        font-size: 3rem;
+    }
+
+    .timeInputs {
+        gap: 7px;
+    }
+
+    .timeInputs input {
+        width: 72px;
+        padding: 12px 5px;
+        font-size: 1.4rem;
+    }
+
+    .detailsInputs {
+        gap: 9px;
+    }
+
+    .detailsInputs input {
+        width: 124px;
+    }
+
+    .marchHUD {
+        top: calc(74px + env(safe-area-inset-top));
+        gap: 8px;
+    }
+
+    .hudBlock {
+        min-width: 0;
+    }
+
+    .marchHUD small {
+        font-size: 0.51rem;
+    }
+
+    .marchHUD strong {
+        font-size: 1.12rem;
+    }
+
+    .milestoneCard {
+        top: 40%;
+        min-height: 135px;
+    }
+
+    .milestoneCard strong {
+        font-size: 2.9rem;
+    }
+
+    .marchComplete {
+        top: 42%;
+    }
+
+    .statsGrid {
+        gap: 10px;
+    }
+
+    .statCard {
+        min-height: 136px;
+        padding: 15px;
+    }
+
+    .perspectiveSingle {
+        padding: 25px 22px;
+    }
+
+    .finalCounter {
+        left: 5vw;
+        top: 27%;
+    }
+
+    .finalCounter strong {
+        font-size: 3.25rem;
+    }
+
+    .finishGate {
+        bottom: 22%;
+        width: 250px;
+        height: 190px;
+    }
+
+    .finishPost {
+        height: 180px;
+    }
+
+    .finalSoldier.crossingFinish {
+        bottom: 40%;
+        transform:
+            translateX(-50%)
+            scale(0.55);
+    }
+
+    .finishButton,
+    .finishNext {
+        right: 5vw;
+    }
+
+    .finishEnterHint {
+        right: 5vw;
+    }
+
+    .celebrationContent {
+        overflow-y: auto;
+        justify-content: flex-start;
+        padding-top:
+            calc(67px + env(safe-area-inset-top));
+        padding-bottom:
+            calc(34px + env(safe-area-inset-bottom));
+    }
+
+    .completeTitle {
+        font-size: 4.45rem;
+    }
+
+    .celebrationTime {
+        font-size: 2.6rem;
+    }
+
+    .personalMessage p {
+        font-size: 0.96rem;
+    }
+
+    .finalStats > div {
+        min-width: 98px;
+        padding: 11px 9px;
+    }
+}
