@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#1a1720"
+    >
+
+    <title>Garrett's 19 Mile Journey</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     GLOBAL FADE TRANSITION
+========================================================= -->
+
+<div id="fadeOverlay"></div>
+
+
+
+<!-- =========================================================
+     PAGE PROGRESS DOTS
+========================================================= -->
+
+<nav
+    id="sceneDots"
+    aria-label="Journey progress"
+>
+
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+
+</nav>
+
+
+
+<!-- =========================================================
+     PAGE 1
+     INTRO
+========================================================= -->
+
+<section
+    id="intro"
+    class="scene sceneOne active"
+>
+
+    <div class="sunGlow"></div>
+
+    <div class="sun"></div>
+
+    <div class="mountains backMountains"></div>
+
+    <div class="mountains frontMountains"></div>
+
+    <div class="forest forestBack"></div>
+
+    <div class="forest forestFront"></div>
+
+    <div class="road">
+
+        <div class="roadLine"></div>
+
+    </div>
+
+
+
+    <!-- SOLDIER -->
+
+    <div class="soldierWrap introSoldier">
+
+        <div class="soldier">
+
+            <div class="ruck">
+
+                <div class="ruckPocket"></div>
+
+            </div>
+
+            <div class="head">
+
+                <div class="patrolCap"></div>
+
+            </div>
+
+            <div class="torso">
+
+                <span>
+                    U.S. ARMY
+                </span>
+
+            </div>
+
+            <div class="arm armLeft"></div>
+
+            <div class="arm armRight"></div>
+
+            <div class="leg legLeft">
+
+                <div class="boot"></div>
+
+            </div>
+
+            <div class="leg legRight">
+
+                <div class="boot"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- INTRO CONTENT -->
+
+    <div class="heroContent">
+
+        <p class="eyebrow">
+            THE NORWEGIAN FOOT MARCH
+        </p>
+
+        <h1 class="heroTitle">
+
+            GARRETT'S
+
+            <span>
+                19 MILE
+            </span>
+
+            JOURNEY
+
+        </h1>
+
+        <p class="heroDistance">
+            19 MILES
+        </p>
+
+        <button
+            type="button"
+            id="beginButton"
+            class="mainButton"
+            data-next="timePage"
+        >
+            BEGIN
+        </button>
+
+        <p class="enterHint">
+            CLICK OR PRESS ENTER
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PAGE 2
+     ENTER HIS RESULTS
+========================================================= -->
+
+<section
+    id="timePage"
+    class="scene sceneTwo"
+>
+
+    <div class="sunGlow"></div>
+
+    <div class="forest forestBack"></div>
+
+    <div class="forest forestFront"></div>
+
+
+
+    <div class="centerContent formContent">
+
+        <p class="eyebrow">
+            YOUR RESULTS
+        </p>
+
+        <h2 class="formTitle">
+
+            ENTER YOUR
+
+            <br>
+
+            RESULTS.
+
+        </h2>
+
+        <p class="subText">
+            Enter your finish time, ruck weight, and height.
+        </p>
+
+
+
+        <!-- FINISH TIME -->
+
+        <div class="timeInputs">
+
+            <label>
+
+                <span>
+                    HOURS
+                </span>
+
+                <input
+                    id="hours"
+                    type="number"
+                    min="0"
+                    max="9"
+                    inputmode="numeric"
+                    placeholder="--"
+                    autocomplete="off"
+                >
+
+            </label>
+
+
+            <strong class="timeColon">
+                :
+            </strong>
+
+
+            <label>
+
+                <span>
+                    MINUTES
+                </span>
+
+                <input
+                    id="minutes"
+                    type="number"
+                    min="0"
+                    max="59"
+                    inputmode="numeric"
+                    placeholder="--"
+                    autocomplete="off"
+                >
+
+            </label>
+
+
+            <strong class="timeColon">
+                :
+            </strong>
+
+
+            <label>
+
+                <span>
+                    SECONDS
+                </span>
+
+                <input
+                    id="seconds"
+                    type="number"
+                    min="0"
+                    max="59"
+                    inputmode="numeric"
+                    placeholder="--"
+                    autocomplete="off"
+                >
+
+            </label>
+
+        </div>
+
+
+
+        <!-- WEIGHT + HEIGHT -->
+
+        <div class="detailsInputs">
+
+            <label>
+
+                <span>
+                    RUCK WEIGHT
+                </span>
+
+                <div class="inputWithUnit">
+
+                    <input
+                        id="weight"
+                        type="number"
+                        min="1"
+                        step="0.1"
+                        inputmode="decimal"
+                        placeholder="--"
+                        autocomplete="off"
+                    >
+
+                    <span class="inputUnit">
+                        LB
+                    </span>
+
+                </div>
+
+            </label>
+
+
+
+            <label>
+
+                <span>
+                    YOUR HEIGHT
+                </span>
+
+                <input
+                    id="height"
+                    type="text"
+                    inputmode="text"
+                    placeholder="6'2&quot;"
+                    autocomplete="off"
+                >
+
+            </label>
+
+        </div>
+
+
+
+        <p
+            id="timeError"
+            class="errorMessage"
+            aria-live="polite"
+        ></p>
+
+
+
+        <button
+            type="button"
+            id="submitTimeButton"
+            class="mainButton"
+        >
+            SUBMIT
+        </button>
+
+        <p class="enterHint">
+            CLICK SUBMIT OR PRESS ENTER
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PAGE 3
+     MARCH ANIMATION
+
+     THIS PAGE ONLY GOES FROM 0 → 18 MILES.
+
+     FINAL MILE IS A SEPARATE PAGE.
+========================================================= -->
+
+<section
+    id="marchPage"
+    class="scene sceneThree"
+>
+
+    <div class="sunGlow"></div>
+
+    <div class="sun"></div>
+
+    <div class="mountains backMountains"></div>
+
+    <div class="mountains frontMountains"></div>
+
+    <div class="forest forestBack movingForest"></div>
+
+    <div class="forest forestFront movingForest fastForest"></div>
+
+    <div class="road movingRoad">
+
+        <div class="roadLine"></div>
+
+    </div>
+
+
+
+    <!-- TOP HUD -->
+
+    <div class="marchHUD">
+
+        <div class="hudBlock">
+
+            <small>
+                DISTANCE
+            </small>
+
+            <strong>
+
+                <span id="distance">
+                    0.0
+                </span>
+
+                MI
+
+            </strong>
+
+        </div>
+
+
+        <div class="hudBlock">
+
+            <small>
+                COURSE
+            </small>
+
+            <strong>
+                19 MILES
+            </strong>
+
+        </div>
+
+
+        <div class="hudBlock">
+
+            <small>
+                PROGRESS
+            </small>
+
+            <strong id="progressPercent">
+                0%
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- WALKING SOLDIER -->
+
+    <div class="soldierWrap marchSoldier walking">
+
+        <div class="soldier">
+
+            <div class="ruck">
+
+                <div class="ruckPocket"></div>
+
+            </div>
+
+            <div class="head">
+
+                <div class="patrolCap"></div>
+
+            </div>
+
+            <div class="torso">
+
+                <span>
+                    U.S. ARMY
+                </span>
+
+            </div>
+
+            <div class="arm armLeft"></div>
+
+            <div class="arm armRight"></div>
+
+            <div class="leg legLeft">
+
+                <div class="boot"></div>
+
+            </div>
+
+            <div class="leg legRight">
+
+                <div class="boot"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!--
+         ONLY ONE MILESTONE CARD EXISTS.
+
+         JAVASCRIPT WILL CHANGE ITS TEXT.
+
+         ORDER:
+         5 MILES
+         10 MILES
+         15 MILES
+         4 MILES LEFT
+         3 MILES LEFT
+         2 MILES LEFT
+         1 MILE LEFT
+    -->
+
+    <div
+        id="milestoneCard"
+        class="milestoneCard hidden"
+    >
+
+        <strong id="milestoneText">
+            5 MILES
+        </strong>
+
+    </div>
+
+
+
+    <!--
+         APPEARS ONLY AFTER:
+         DISTANCE = 18.0
+         AND
+         1 MILE LEFT HAS FINISHED DISPLAYING.
+    -->
+
+    <div
+        id="marchComplete"
+        class="marchComplete hidden"
+    >
+
+        <p class="eyebrow">
+            18 MILES COMPLETE
+        </p>
+
+        <h2>
+            ONE FINAL MILE.
+        </h2>
+
+        <button
+            type="button"
+            class="mainButton"
+            data-next="resultPage"
+        >
+            CONTINUE
+        </button>
+
+        <p class="enterHint">
+            CLICK OR PRESS ENTER
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PAGE 4
+     GARRETT'S FINISH TIME
+========================================================= -->
+
+<section
+    id="resultPage"
+    class="scene sceneFour"
+>
+
+    <div class="sunGlow"></div>
+
+    <div class="forest forestBack"></div>
+
+    <div class="forest forestFront"></div>
+
+
+
+    <div class="centerContent resultContent">
+
+        <p class="eyebrow">
+            YOUR RESULT
+        </p>
+
+        <h2
+            id="bigFinishTime"
+            class="giantTime"
+        >
+            --:--:--
+        </h2>
+
+        <p class="resultLabel">
+            GARRETT'S FINISH TIME
+        </p>
+
+
+
+        <!-- STANDARD -->
+
+        <div class="standardCard">
+
+            <small>
+                STANDARD
+            </small>
+
+            <strong>
+                04:30:00
+            </strong>
+
+        </div>
+
+
+
+        <!-- DIFFERENCE -->
+
+        <div class="differenceBox">
+
+            <small id="differenceLabel">
+                TIME UNDER STANDARD
+            </small>
+
+            <strong id="differenceResult">
+                --:--:--
+            </strong>
+
+        </div>
+
+
+
+        <button
+            type="button"
+            class="mainButton"
+            data-next="statsPage"
+        >
+            SEE THE NUMBERS
+        </button>
+
+        <p class="enterHint">
+            CLICK OR PRESS ENTER
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PAGE 5
+     SO.. OVERALL
+========================================================= -->
+
+<section
+    id="statsPage"
+    class="scene sceneFive"
+>
+
+    <div class="sunGlow"></div>
+
+    <div class="forest forestBack"></div>
+
+    <div class="forest forestFront"></div>
+
+
+
+    <div class="pageContent">
+
+        <h2 class="pageTitle">
+            So.. overall
+        </h2>
+
+
+
+        <div class="statsGrid">
+
+
+            <!-- DISTANCE -->
+
+            <article class="statCard">
+
+                <span class="statLabel">
+                    DISTANCE
+                </span>
+
+                <strong>
+                    19
+                </strong>
+
+                <p>
+                    MILES
+                </p>
+
+            </article>
+
+
+
+            <!-- EXACT ENTERED RUCK WEIGHT -->
+
+            <article class="statCard">
+
+                <span class="statLabel">
+                    LOAD
+                </span>
+
+                <strong id="loadResult">
+                    --
+                </strong>
+
+                <p>
+                    POUNDS
+                </p>
+
+            </article>
+
+
+
+            <!-- PACE -->
+
+            <article class="statCard">
+
+                <span class="statLabel">
+                    YOUR PACE
+                </span>
+
+                <strong id="paceResult">
+                    --
+                </strong>
+
+                <p>
+                    MIN / MILE
+                </p>
+
+            </article>
+
+
+
+            <!-- SPEED -->
+
+            <article class="statCard">
+
+                <span class="statLabel">
+                    AVG SPEED
+                </span>
+
+                <strong id="speedResult">
+                    --
+                </strong>
+
+                <p>
+                    MPH
+                </p>
+
+            </article>
+
+
+
+            <!-- ESTIMATED STEPS -->
+
+            <article class="statCard highlightedCard">
+
+                <span class="statLabel">
+                    ESTIMATED
+                </span>
+
+                <strong id="stepsResult">
+                    --
+                </strong>
+
+                <p>
+                    STEPS
+                </p>
+
+            </article>
+
+
+
+            <!-- FINISH -->
+
+            <article class="statCard">
+
+                <span class="statLabel">
+                    FINISH
+                </span>
+
+                <strong id="statsFinish">
+                    --:--:--
+                </strong>
+
+                <p>
+                    19 MILES
+                </p>
+
+            </article>
+
+        </div>
+
+
+
+        <p
+            id="stepNote"
+            class="smallNote"
+        >
+            Step count is estimated from your height.
+        </p>
+
+
+
+        <button
+            type="button"
+            class="mainButton"
+            data-next="perspectivePage"
+        >
+            CONTINUE
+        </button>
+
+        <p class="enterHint">
+            CLICK OR PRESS ENTER
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PAGE 6
+     PERSPECTIVE
+
+     NO EXTRA "PERSPECTIVE" HEADER.
+     NO "PUT IT INTO PERSPECTIVE" HEADER.
+========================================================= -->
+
+<section
+    id="perspectivePage"
+    class="scene sceneSix"
+>
+
+    <div class="sunGlow"></div>
+
+    <div class="forest forestBack"></div>
+
+    <div class="forest forestFront"></div>
+
+
+
+    <div class="centerContent perspectiveContent">
+
+        <div class="perspectiveSingle">
+
+            <p>
+
+                Not everyone voluntarily carries
+
+                <strong id="perspectiveWeight">
+                    --
+                </strong>
+
+                pounds across
+
+                <strong>
+                    19 miles.
+                </strong>
+
+            </p>
+
+        </div>
+
+
+
+        <button
+            type="button"
+            class="mainButton"
+            data-next="finalPage"
+        >
+            THE FINAL MILE
+        </button>
+
+        <p class="enterHint">
+            CLICK OR PRESS ENTER
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PAGE 7
+     FINAL MILE
+
+     THIS PAGE GOES FROM 18.0 → 19.0.
+========================================================= -->
+
+<section
+    id="finalPage"
+    class="scene sceneSeven"
+>
+
+    <!-- COLORED + WHITE FINISH CONFETTI -->
+
+    <canvas
+        id="finishConfettiCanvas"
+        aria-hidden="true"
+    ></canvas>
+
+
+
+    <div class="sunGlow"></div>
+
+    <div class="sun finalSun"></div>
+
+    <div class="mountains backMountains"></div>
+
+    <div class="mountains frontMountains"></div>
+
+    <div class="forest forestBack"></div>
+
+    <div class="forest forestFront"></div>
+
+    <div class="road movingRoad">
+
+        <div class="roadLine"></div>
+
+    </div>
+
+
+
+    <!-- FINAL MILE COUNTER -->
+
+    <div class="finalCounter">
+
+        <p class="eyebrow">
+            THE FINAL PUSH
+        </p>
+
+        <strong>
+
+            <span id="finalDistance">
+                18.0
+            </span>
+
+            MILES
+
+        </strong>
+
+        <p id="finalMessage">
+            One mile left.
+        </p>
+
+    </div>
+
+
+
+    <!-- WHITE FINISH STRUCTURE -->
+
+    <div
+        id="finishGate"
+        class="finishGate"
+        aria-hidden="true"
+    >
+
+        <div class="finishTop">
+            FINISH
+        </div>
+
+        <div class="finishPost leftPost"></div>
+
+        <div class="finishPost rightPost"></div>
+
+    </div>
+
+
+
+    <!-- FINAL SOLDIER -->
+
+    <div
+        id="finalSoldier"
+        class="soldierWrap finalSoldier walking"
+    >
+
+        <div class="soldier">
+
+            <div class="ruck">
+
+                <div class="ruckPocket"></div>
+
+            </div>
+
+            <div class="head">
+
+                <div class="patrolCap"></div>
+
+            </div>
+
+            <div class="torso">
+
+                <span>
+                    U.S. ARMY
+                </span>
+
+            </div>
+
+            <div class="arm armLeft"></div>
+
+            <div class="arm armRight"></div>
+
+            <div class="leg legLeft">
+
+                <div class="boot"></div>
+
+            </div>
+
+            <div class="leg legRight">
+
+                <div class="boot"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!--
+         DISABLED UNTIL FINAL COUNTER REACHES 19.0
+    -->
+
+    <button
+        type="button"
+        id="crossFinish"
+        class="mainButton finishButton"
+        disabled
+    >
+        CROSS THE FINISH
+    </button>
+
+
+    <p
+        id="finishEnterHint"
+        class="finishEnterHint"
+    >
+        THE FINAL MILE
+    </p>
+
+
+
+    <!--
+         APPEARS AFTER:
+         SOLDIER CROSSES
+         FINISH STRUCTURE BREAKS
+         CONFETTI FIRES
+    -->
+
+    <button
+        type="button"
+        id="finishNextButton"
+        class="mainButton finishNext hidden"
+    >
+        NEXT
+    </button>
+
+</section>
+
+
+
+<!-- =========================================================
+     PAGE 8
+     CELEBRATION
+========================================================= -->
+
+<section
+    id="celebrationPage"
+    class="scene sceneEight"
+>
+
+    <canvas
+        id="confettiCanvas"
+        aria-hidden="true"
+    ></canvas>
+
+
+
+    <div class="celebrationGlow"></div>
+
+    <div class="forest celebrationForest forestBack"></div>
+
+    <div class="forest celebrationForest forestFront"></div>
+
+
+
+    <div class="centerContent celebrationContent">
+
+        <div class="flags">
+
+            <span>
+                🇺🇸
+            </span>
+
+            <span class="flagStar">
+                ✦
+            </span>
+
+            <span>
+                🇳🇴
+            </span>
+
+        </div>
+
+
+        <p class="eyebrow">
+            19.00 MILES
+        </p>
+
+
+        <h2 class="completeTitle">
+            COMPLETE.
+        </h2>
+
+
+        <strong
+            id="celebrationTime"
+            class="celebrationTime"
+        >
+            --:--:--
+        </strong>
+
+
+        <p
+            id="celebrationDifference"
+            class="goldText"
+        >
+            NORWEGIAN FOOT MARCH COMPLETE
+        </p>
+
+
+        <div class="medal">
+            🏅
+        </div>
+
+
+
+        <!-- PERSONAL MESSAGE — NOT ITALIC -->
+
+        <div class="personalMessage">
+
+            <p>
+                You did it! I am so proud of you and to be with you!
+            </p>
+
+            <p>
+                I can’t wait to see you accomplish more goals that you’ll set for yourself and support you through them.
+            </p>
+
+        </div>
+
+
+
+        <!-- FINAL STATS -->
+
+        <div class="finalStats">
+
+
+            <div>
+
+                <strong>
+                    19
+                </strong>
+
+                <span>
+                    MILES
+                </span>
+
+            </div>
+
+
+
+            <div>
+
+                <strong id="celebrationWeight">
+                    --
+                </strong>
+
+                <span>
+                    LB RUCK
+                </span>
+
+            </div>
+
+
+
+            <div>
+
+                <strong id="finalStepResult">
+                    --
+                </strong>
+
+                <span>
+                    EST. STEPS
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <button
+            type="button"
+            id="replayButton"
+            class="mainButton"
+        >
+            REPLAY
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
